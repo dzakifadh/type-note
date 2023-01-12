@@ -9,3 +9,4 @@
 ## Information
 
 `import * as NotesController from "../path/notes";` -> we can use this style import/export instead of using classes
+[Status Code Detail](https://ivantay2003.medium.com/http-status-code-1e69e3d579c1) => Resource to see http status code in more detail
