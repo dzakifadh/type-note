@@ -1,16 +1,16 @@
 import express, { NextFunction, Request, Response } from "express";
-import note from "./models/note";
+import morgan from "morgan";
+import notesRoutes from "./routes/notes";
 
 const app = express();
 
-app.get("/", async (req, res, next) => {
-	try {
-		const notes = await note.find().exec();
-		res.status(200).json(notes);
-	} catch (error) {
-		next(error);
-	}
-});
+app.use(morgan("dev"));
+
+// Only json format allow request from client
+app.use(express.json());
+
+// Router
+app.use("/api/notes", notesRoutes);
 
 app.use((req, res, next) => {
 	next(Error("Endpoint not found"));
