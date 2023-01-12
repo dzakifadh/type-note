@@ -1,13 +1,7 @@
 import "dotenv/config";
-import express from "express";
 import mongoose from "mongoose";
+import app from "./app";
 import { MONGO_URL, PORT } from "./utils";
-
-const app = express();
-
-app.get("/", (req, res) => {
-	res.send("Hello World");
-});
 
 // Connect to mongoose databse
 mongoose
