@@ -29,8 +29,9 @@ export const getNote: RequestHandler = async (req, res, next) => {
 	}
 };
 
+// The title and text set to nullable because possibilty to undefined
 interface CreateNoteBody {
-	title: string;
+	title?: string;
 	text?: string;
 }
 
