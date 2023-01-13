@@ -15,6 +15,7 @@ interface NoteParams {
 
 export const getNotes: RequestHandler = async (req, res, next) => {
 	try {
+		// throw createHttpError(401, "Lalalalal");
 		const notes = await NoteModel.find().exec();
 		res.status(200).json(notes);
 	} catch (error) {
