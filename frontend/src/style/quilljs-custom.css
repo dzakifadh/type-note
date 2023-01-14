@@ -1,0 +1,30 @@
+.ql-snow .ql-stroke {
+	@apply dark:stroke-white;
+}
+.ql-snow .ql-fill,
+.ql-snow .ql-stroke.ql-fill {
+	@apply dark:fill-white;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-label::before,
+.ql-snow .ql-picker.ql-size .ql-picker-item::before {
+	@apply dark:text-white;
+}
+.ql-snow .ql-picker.ql-header .ql-picker-label::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+	@apply dark:text-white;
+}
+.ql-toolbar.ql-snow {
+	font-family: "Quicksand", sans-serif;
+	@apply rounded-t-lg border border-solid border-dark-30 dark:bg-dark-30;
+}
+.ql-container.ql-snow {
+	font-family: "Quicksand", sans-serif;
+	@apply rounded-b-lg border border-solid border-dark-30 dark:bg-dark-30;
+}
+.ql-editor {
+	@apply h-52 text-base;
+}
+.ql-editor.ql-blank::before {
+	font-style: normal;
+	@apply text-slate-400/50;
+}

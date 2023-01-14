@@ -6,11 +6,11 @@ const SearchForm = () => {
 			<input
 				type="text"
 				placeholder="Search Here..."
-				className="form-input dark:bg-dark-30 dark:border dark:border-dark-30 px-3 py-2 rounded-lg flex-grow"
+				className="form-input flex-grow rounded-lg px-3 py-2 dark:border dark:border-dark-30 dark:bg-dark-30"
 			/>
 			<button
 				type="submit"
-				className="bg-blue-600 rounded-lg w-11 inline-flex items-center justify-center"
+				className="inline-flex w-11 items-center justify-center rounded-lg bg-blue-600 duration-300 hover:bg-blue-700"
 			>
 				<SearchIcon />
 			</button>

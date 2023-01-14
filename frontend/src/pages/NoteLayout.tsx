@@ -4,10 +4,6 @@ import { Outlet } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
 import SearchForm from "../components/SearchForm";
 import { Note as NoteModel } from "../models/notes";
-// import NoteCard from "./components/NoteCard";
-// import SearchForm from "./components/SearchForm";
-// import { Note as NoteModel } from "./models/notes";
-// import Note from "./pages/Note";
 import * as NoteService from "../services/note";
 
 const NoteLayout = () => {
@@ -29,7 +25,7 @@ const NoteLayout = () => {
 
 	return (
 		<section className="flex h-screen text-white">
-			<aside className="dark:bg-dark-10 w-96 flex-shrink-0 p-4">
+			<aside className="w-96 flex-shrink-0 p-4 dark:bg-dark-10">
 				<SearchForm />
 				Tags
 				<div className="flex flex-col gap-4">
@@ -38,10 +34,10 @@ const NoteLayout = () => {
 					))}
 				</div>
 			</aside>
-			<main className="p-8 bg-dark flex-1">
+			<main className="flex-1 bg-dark p-8">
 				<Outlet />
 			</main>
-			<aside className="w-72 bg-dark-10 flex-shrink-0"></aside>
+			<aside className="w-72 flex-shrink-0 bg-dark-10"></aside>
 		</section>
 	);
 };
