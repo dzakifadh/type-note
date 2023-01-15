@@ -1,12 +1,12 @@
 import axios from "axios";
-import { Note, NoteInput } from "../models/notes";
+import { INote, INoteInput } from "../@types/note";
 
 export const getNote = async () => {
 	const res = await axios.get("http://localhost:8080/api/notes");
 	return res;
 };
 
-export const createNote = async (note: NoteInput): Promise<Note> => {
+export const createNote = async (note: INoteInput): Promise<INote> => {
 	const res = await axios.post("http://localhost:8080/api/notes", note);
 	return res.data;
 };

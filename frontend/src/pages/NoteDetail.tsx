@@ -2,36 +2,37 @@ import { useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { INoteInput } from "../@types/note";
 import WarningIcon from "../components/icons/WarningIcon";
-import { NoteInput } from "../models/notes";
+import { useNoteContext } from "../context/noteContext";
 import * as NoteService from "../services/note";
 import "../style/quilljs-custom.css";
 
 const NoteDetail = () => {
+	const noteContext = useNoteContext();
 	const {
 		register,
 		handleSubmit,
 		control,
+		reset,
 		formState: { errors, isSubmitting },
-	} = useForm<NoteInput>();
+	} = useForm<INoteInput>({ mode: "onTouched" });
 
-	const handleOnSubmit = async (input: NoteInput) => {
-		console.log("INPUT", input);
-		return false;
-
+	const handleOnSubmit = async (input: INoteInput) => {
 		try {
 			const noteRes = await NoteService.createNote(input);
+			noteContext?.setNotesHandler(noteRes);
+			reset({ title: "", text: "" });
 		} catch (error) {
 			console.log(error);
 		}
 	};
-
 	const [quillText, setQuillText] = useState<string>();
 
 	return (
 		<div>
 			<h1 className="mb-10 text-4xl font-bold">Note Details</h1>
-			<form onSubmit={handleSubmit(handleOnSubmit)}>
+			<form onSubmit={handleSubmit(handleOnSubmit)} id="yure">
 				<div className="mb-6">
 					<label
 						htmlFor="title"
@@ -69,7 +70,6 @@ const NoteDetail = () => {
 						render={({ field: { onChange, onBlur, value, ref } }) => (
 							<ReactQuill
 								theme="snow"
-								value={quillText}
 								onChange={(content) => {
 									if (content !== "<p><br></p>" || !content) {
 										onChange(content);
@@ -82,23 +82,23 @@ const NoteDetail = () => {
 								placeholder="Type text here..."
 								modules={{
 									toolbar: [
-										["bold", "italic", "underline", "strike"], // toggled buttons
+										["bold", "italic", "underline", "strike"],
 										["blockquote", "code-block"],
+										["link", "image"],
 
-										[{ header: 1 }, { header: 2 }], // custom button values
+										[{ header: 1 }, { header: 2 }],
 										[{ list: "ordered" }, { list: "bullet" }],
-										[{ script: "sub" }, { script: "super" }], // superscript/subscript
-										[{ indent: "-1" }, { indent: "+1" }], // outdent/indent
-										[{ direction: "rtl" }], // text direction
+										[{ script: "sub" }, { script: "super" }],
+										[{ indent: "-1" }, { indent: "+1" }],
+										[{ direction: "rtl" }],
 
-										[{ size: ["small", false, "large", "huge"] }], // custom dropdown
+										[{ size: ["small", false, "large", "huge"] }],
 										[{ header: [1, 2, 3, 4, 5, 6, false] }],
 
-										[{ color: [] }, { background: [] }], // dropdown with defaults from theme
-										[{ font: [] }],
+										[{ color: [] }, { background: [] }],
 										[{ align: [] }],
 
-										["clean"], // remove formatting button
+										["clean"],
 									],
 								}}
 							/>
@@ -115,7 +115,8 @@ const NoteDetail = () => {
 				<div className="flex justify-end">
 					<button
 						type="submit"
-						className="rounded-lg bg-blue-600 py-3 px-6 duration-300 hover:bg-blue-700"
+						disabled={isSubmitting}
+						className="rounded-lg bg-blue-600 py-3 px-6 duration-300 hover:bg-blue-700 disabled:cursor-wait disabled:bg-gray-200/20"
 					>
 						Save
 					</button>

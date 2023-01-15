@@ -22,9 +22,13 @@
 	@apply rounded-b-lg border border-solid border-dark-30 dark:bg-dark-30;
 }
 .ql-editor {
-	@apply h-52 text-base;
+	@apply h-72 text-base;
 }
 .ql-editor.ql-blank::before {
 	font-style: normal;
 	@apply text-slate-400/50;
+}
+.ql-snow .ql-picker.ql-size .ql-picker-item::before,
+.ql-snow .ql-picker.ql-header .ql-picker-item::before {
+	@apply text-dark;
 }

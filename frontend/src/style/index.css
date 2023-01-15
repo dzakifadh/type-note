@@ -5,3 +5,15 @@
 body {
 	font-family: "Quicksand", sans-serif;
 }
+
+@media (prefers-color-scheme: dark) {
+	html {
+		color-scheme: dark;
+	}
+}
+.overlay-bottom {
+	@apply relative;
+}
+.overlay-bottom::after {
+	@apply pointer-events-none fixed left-0 bottom-0 h-48 w-96 select-text bg-gradient-to-t from-dark content-[""];
+}

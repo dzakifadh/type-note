@@ -1,43 +1,31 @@
-import { AxiosError } from "axios";
-import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 import NoteCard from "../components/NoteCard";
 import SearchForm from "../components/SearchForm";
-import { Note as NoteModel } from "../models/notes";
-import * as NoteService from "../services/note";
+import { useNoteContext } from "../context/noteContext";
 
 const NoteLayout = () => {
-	const [notes, setNotes] = useState<NoteModel[]>([]);
-
-	const getNotes = async () => {
-		try {
-			const resultNotes = await NoteService.getNote();
-			setNotes(resultNotes.data);
-		} catch (error) {
-			const err = error as AxiosError;
-			console.log(err);
-		}
-	};
-
-	useEffect(() => {
-		getNotes();
-	}, []);
+	const noteContext = useNoteContext();
 
 	return (
 		<section className="flex h-screen text-white">
-			<aside className="w-96 flex-shrink-0 p-4 dark:bg-dark-10">
+			<aside className="overlay-bottom h-screen w-96 flex-shrink-0 overflow-auto p-4 dark:bg-dark-10">
+				{!noteContext?.notes.length && (
+					<div className="absolute inset-0 flex items-center justify-center">
+						<p className="text-lg text-gray-100/90">Note Empty 🥹</p>
+					</div>
+				)}
 				<SearchForm />
 				Tags
 				<div className="flex flex-col gap-4">
-					{notes.map((note) => (
+					{noteContext?.notes.map((note) => (
 						<NoteCard key={note._id} note={note} />
 					))}
 				</div>
 			</aside>
-			<main className="flex-1 bg-dark p-8">
+			<main className="flex-1 p-8 dark:bg-dark">
 				<Outlet />
 			</main>
-			<aside className="w-72 flex-shrink-0 bg-dark-10"></aside>
+			<aside className="w-72 flex-shrink-0 dark:bg-dark-10"></aside>
 		</section>
 	);
 };
