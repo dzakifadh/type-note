@@ -3,7 +3,7 @@ import {
 	createContext,
 	ReactNode,
 	useContext,
-	useEffect,
+	useLayoutEffect,
 	useState,
 } from "react";
 import { INote, NoteContextType } from "../@types/note";
@@ -40,7 +40,7 @@ const NoteProvider = ({ children }: ContextProviderProps) => {
 		}
 	};
 
-	useEffect(() => {
+	useLayoutEffect(() => {
 		getNotes();
 	}, []);
 

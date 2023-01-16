@@ -14,6 +14,4 @@ export interface INoteInput {
 export type NoteContextType = {
 	notes: INote[];
 	setNotesHandler: (note: INote) => void;
-	// saveTodo: (todo: ITodo) => void;
-	// updateTodo: (id: number) => void;
 };

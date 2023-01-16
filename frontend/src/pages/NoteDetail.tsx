@@ -20,8 +20,6 @@ const NoteDetail = () => {
 		reValidateMode: "onBlur",
 	});
 
-	console.log("errors", errors);
-
 	const handleOnSubmit = async (input: INoteInput) => {
 		try {
 			const noteRes = await NoteService.createNote(input);
