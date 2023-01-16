@@ -16,13 +16,18 @@ const NoteDetail = () => {
 		control,
 		reset,
 		formState: { errors, isSubmitting },
-	} = useForm<INoteInput>({ mode: "onTouched" });
+	} = useForm<INoteInput>({
+		reValidateMode: "onBlur",
+	});
+
+	console.log("errors", errors);
 
 	const handleOnSubmit = async (input: INoteInput) => {
 		try {
 			const noteRes = await NoteService.createNote(input);
 			noteContext?.setNotesHandler(noteRes);
 			reset({ title: "", text: "" });
+			setQuillText("");
 		} catch (error) {
 			console.log(error);
 		}
@@ -65,11 +70,16 @@ const NoteDetail = () => {
 						control={control}
 						name="text"
 						rules={{
-							required: "Please enter note detail",
+							required: "Please enter note (text) detail",
 						}}
 						render={({ field: { onChange, onBlur, value, ref } }) => (
 							<ReactQuill
 								theme="snow"
+								onBlur={(content: ReactQuill.Range) => {
+									if (content?.index !== undefined && content.index > 0) {
+										onBlur();
+									}
+								}}
 								onChange={(content) => {
 									if (content !== "<p><br></p>" || !content) {
 										onChange(content);
@@ -80,6 +90,7 @@ const NoteDetail = () => {
 									}
 								}}
 								placeholder="Type text here..."
+								value={quillText}
 								modules={{
 									toolbar: [
 										["bold", "italic", "underline", "strike"],
