@@ -1,43 +1,60 @@
-import { useLayoutEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
-import { INote, NoteContextType } from "../@types/note";
+import useSWR from "swr";
+import { INote } from "../@types/note";
 import NoteCard from "../components/NoteCard";
 import SearchForm from "../components/SearchForm";
-import { useNoteContext } from "../context/noteContext";
+import * as NoteService from "../services/note";
 
 const NoteLayout = () => {
-	const NoteContext = useNoteContext() as NoteContextType;
+	const {
+		data: notesData,
+		error: notesError,
+		isLoading: notesIsLoading,
+	} = useSWR("/", NoteService.getNotes);
 
-	const [notes, setNotes] = useState<INote[]>([]);
-	const [loading, setLoading] = useState<boolean>(true);
-
-	console.log("loading", loading);
-
-	useLayoutEffect(() => {
-		setNotes(NoteContext.notes);
-		setTimeout(() => {
-			setLoading(false);
-		}, 500);
-	}, [NoteContext]);
+	if (notesError)
+		return (
+			<div className="flex h-screen items-center justify-center">
+				Failed to load 🥹
+			</div>
+		);
+	if (notesIsLoading)
+		return (
+			<div className="flex h-screen items-center justify-center">
+				Loading...
+			</div>
+		);
 
 	return (
 		<section className="flex h-screen text-white">
 			<aside className="overlay-bottom h-screen w-96 flex-shrink-0 overflow-auto p-4 dark:bg-dark-10">
-				{loading ? (
+				{notesIsLoading ? (
 					<div className="absolute inset-0 flex items-center justify-center">
 						<p className="text-lg text-gray-100/90">Loading...</p>
 					</div>
 				) : (
 					<>
-						{!notes.length && (
+						{!notesData?.data && (
 							<div className="absolute inset-0 flex items-center justify-center">
 								<p className="text-lg text-gray-100/90">Note Empty 🥹</p>
 							</div>
 						)}
 						<SearchForm />
-						Tags
+						<div className="mt-4 mb-6">
+							<h5 className="mb-3 font-medium text-slate-200/50">
+								Filter by tag
+							</h5>
+							<div className="flex flex-wrap gap-1.5">
+								<span className="badge">NodeJS</span>
+								<span className="badge">Laravel</span>
+								<span className="badge">HTML</span>
+								<span className="badge">PostgreSQL</span>
+								<span className="badge">CSS</span>
+								<span className="badge">Go</span>
+							</div>
+						</div>
 						<div className="flex flex-col gap-4">
-							{notes.map((note) => (
+							{notesData?.data.map((note: INote) => (
 								<NoteCard key={note._id} note={note} />
 							))}
 						</div>

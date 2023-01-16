@@ -1,8 +1,12 @@
 import axios from "axios";
 import { INote, INoteInput } from "../@types/note";
 
-export const getNote = async () => {
+export const getNotes = async () => {
 	const res = await axios.get("http://localhost:8080/api/notes");
+	return res;
+};
+export const getNote = async (id?: string) => {
+	const res = await axios.get(`http://localhost:8080/api/notes/${id}`);
 	return res;
 };
 
