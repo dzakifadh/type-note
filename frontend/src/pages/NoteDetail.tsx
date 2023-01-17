@@ -38,10 +38,11 @@ const NoteDetail = () => {
 			</div>
 		);
 
-	if (noteIsLoading)
+	if (noteIsLoading) {
 		return (
 			<div className="flex h-full items-center justify-center">Loading...</div>
 		);
+	}
 
 	return (
 		<>

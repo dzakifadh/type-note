@@ -118,7 +118,7 @@ const NoteForm = () => {
 						rules={{
 							required: "Please enter note (text) detail",
 						}}
-						render={({ field: { onChange, onBlur, value, ref } }) => (
+						render={({ field: { onChange, onBlur } }) => (
 							<ReactQuill
 								theme="snow"
 								onBlur={(content: ReactQuill.Range) => {

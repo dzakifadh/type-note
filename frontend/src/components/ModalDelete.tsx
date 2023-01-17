@@ -7,7 +7,7 @@ import TriangleExclamationIcon from "./icons/TriangleExclamationIcon";
 
 interface IModalProps {
 	isOpen: boolean;
-	setIsOpen: any;
+	setIsOpen: (value: boolean | ((prevVar: boolean) => boolean)) => void;
 	noteId: string;
 }
 

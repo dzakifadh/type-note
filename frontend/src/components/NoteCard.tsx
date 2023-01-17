@@ -1,7 +1,7 @@
 import { Menu, Transition } from "@headlessui/react";
 import HTMLReactParser from "html-react-parser";
 import { Fragment, useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { INote } from "../@types/note";
 import { formatData } from "../utils";
 import DeleteIcon from "./icons/DeleteIcon";
@@ -13,13 +13,7 @@ interface INoteProps {
 	note: INote;
 }
 
-type INoteparams = {
-	id: string;
-};
-
 const NoteCard = ({ note }: INoteProps) => {
-	const { id: urlId } = useParams<INoteparams>();
-
 	const navigate = useNavigate();
 
 	const handleGeNote = (id: string) => {
