@@ -14,15 +14,13 @@ const NoteLayout = () => {
 
 	if (notesError)
 		return (
-			<div className="flex h-screen items-center justify-center">
+			<div className="flex h-full items-center justify-center">
 				Failed to load 🥹
 			</div>
 		);
 	if (notesIsLoading)
 		return (
-			<div className="flex h-screen items-center justify-center">
-				Loading...
-			</div>
+			<div className="flex h-full items-center justify-center">Loading...</div>
 		);
 
 	return (

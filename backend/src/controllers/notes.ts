@@ -15,8 +15,7 @@ interface NoteParams {
 
 export const getNotes: RequestHandler = async (req, res, next) => {
 	try {
-		// throw createHttpError(401, "Lalalalal");
-		const notes = await NoteModel.find().sort({ _id: -1 }).exec();
+		const notes = await NoteModel.find().sort({ updatedAt: -1 }).exec();
 		res.status(200).json(notes);
 	} catch (error) {
 		next(error);
@@ -104,6 +103,8 @@ export const deleteNote: RequestHandler = async (req, res, next) => {
 		if (!note) {
 			throw createHttpError(404, "Note not found");
 		}
+
+		await note.remove();
 
 		res.sendStatus(204);
 	} catch (error) {

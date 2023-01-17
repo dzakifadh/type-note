@@ -1,21 +1,36 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useSWRConfig } from "swr";
+import { useLocation, useParams } from "react-router-dom";
+import useSWR, { useSWRConfig } from "swr";
 import { INoteInput } from "../@types/note";
 import WarningIcon from "../components/icons/WarningIcon";
 import * as NoteService from "../services/note";
 import "../style/quilljs-custom.css";
 
+type INoteparams = {
+	id: string;
+};
+
 const NoteForm = () => {
 	const { mutate } = useSWRConfig();
+	const { pathname } = useLocation();
+
+	const { id: urlId } = useParams<INoteparams>();
+
+	const {
+		data: noteData,
+		error: noteError,
+		isLoading: noteIsLoading,
+	} = useSWR(urlId ? urlId : null, NoteService.getNote);
 
 	const {
 		register,
 		handleSubmit,
 		control,
 		reset,
+		setValue,
 		formState: { errors, isSubmitting },
 	} = useForm<INoteInput>({
 		reValidateMode: "onBlur",
@@ -23,7 +38,11 @@ const NoteForm = () => {
 
 	const handleOnSubmit = async (input: INoteInput) => {
 		try {
-			await NoteService.createNote(input);
+			if (action === "create") {
+				await NoteService.createNote(input);
+			} else {
+				await NoteService.updateNote(input, urlId);
+			}
 			reset({ title: "", text: "" });
 			setQuillText("");
 			mutate("/");
@@ -31,11 +50,39 @@ const NoteForm = () => {
 			console.log(error);
 		}
 	};
+
+	const [action, setAction] = useState<string>("");
 	const [quillText, setQuillText] = useState<string>();
+
+	useEffect(() => {
+		setAction(pathname.split("/")[2]);
+	}, [pathname]);
+
+	useEffect(() => {
+		if (noteData && action === "update" && urlId) {
+			setValue("title", noteData.data.title);
+			setValue("text", noteData.data.text);
+			setQuillText(noteData.data.text);
+		}
+	}, [noteData, action, urlId]);
+
+	if (noteError)
+		return (
+			<div className="flex h-full items-center justify-center">
+				Failed to load 🥹
+			</div>
+		);
+	if (noteIsLoading)
+		return (
+			<div className="flex h-full items-center justify-center">Loading...</div>
+		);
 
 	return (
 		<>
-			<h1 className="mb-10 text-4xl font-bold">Note Details</h1>
+			<h1 className="mb-10 text-4xl font-bold">
+				{action === "create" ? "Create Note" : null}
+				{action === "update" ? "Update Note" : null}
+			</h1>
 			<form onSubmit={handleSubmit(handleOnSubmit)}>
 				<div className="mb-6">
 					<label

@@ -1,22 +1,37 @@
 import { Menu, Transition } from "@headlessui/react";
 import HTMLReactParser from "html-react-parser";
-import { Fragment } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Fragment, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { INote } from "../@types/note";
 import { formatData } from "../utils";
 import DeleteIcon from "./icons/DeleteIcon";
 import DotVerticalIcon from "./icons/DotVerticalIcon";
 import EditIcon from "./icons/EditIcon";
+import ModalDelete from "./ModalDelete";
 
 interface INoteProps {
 	note: INote;
 }
 
+type INoteparams = {
+	id: string;
+};
+
 const NoteCard = ({ note }: INoteProps) => {
+	const { id: urlId } = useParams<INoteparams>();
+
 	const navigate = useNavigate();
+
 	const handleGeNote = (id: string) => {
 		navigate(`/notes/${id}`);
 	};
+
+	const [isOpen, setIsOpen] = useState<boolean>(false);
+
+	const openModal = () => {
+		setIsOpen(true);
+	};
+
 	return (
 		<div className="relative">
 			<div
@@ -31,8 +46,8 @@ const NoteCard = ({ note }: INoteProps) => {
 					{note?.text && HTMLReactParser(note.text)}
 				</div>
 				<div className="mt-auto justify-items-end pt-8">
-					<span className="inline-flex h-9 items-center">
-						{formatData(note.createdAt || note.updatedAt)}
+					<span className="inline-flex h-9 items-center text-sm">
+						Last update: {formatData(note.updatedAt || note.createdAt)}
 					</span>
 				</div>
 			</div>
@@ -76,6 +91,7 @@ const NoteCard = ({ note }: INoteProps) => {
 									<Menu.Item>
 										{({ active }) => (
 											<button
+												onClick={openModal}
 												className={`${
 													active ? "dark:bg-dark-30" : "dark:bg-dark-20"
 												} group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium duration-300`}
@@ -91,6 +107,7 @@ const NoteCard = ({ note }: INoteProps) => {
 					</>
 				)}
 			</Menu>
+			<ModalDelete isOpen={isOpen} setIsOpen={setIsOpen} noteId={note._id} />
 		</div>
 	);
 };
