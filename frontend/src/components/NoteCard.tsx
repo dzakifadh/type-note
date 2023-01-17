@@ -4,9 +4,7 @@ import { Fragment, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { INote } from "../@types/note";
 import { formatData } from "../utils";
-import DeleteIcon from "./icons/DeleteIcon";
-import DotVerticalIcon from "./icons/DotVerticalIcon";
-import EditIcon from "./icons/EditIcon";
+import { DeleteIcon, DotVerticalIcon, EditIcon } from "./icons";
 import ModalDelete from "./ModalDelete";
 
 interface INoteProps {
@@ -56,7 +54,7 @@ const NoteCard = ({ note }: INoteProps) => {
 								open ? " bg-blue-600/30" : ""
 							}`}
 						>
-							<DotVerticalIcon color="#3471FF" />
+							<DotVerticalIcon className="fill-blue-600" />
 						</Menu.Button>
 						<Transition
 							as={Fragment}
@@ -77,7 +75,7 @@ const NoteCard = ({ note }: INoteProps) => {
 													active ? "dark:bg-dark-30" : "dark:bg-dark-20"
 												} group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium duration-300`}
 											>
-												<EditIcon color="#3471FF" />
+												<EditIcon className="fill-blue-600" />
 												Update
 											</Link>
 										)}
@@ -90,7 +88,7 @@ const NoteCard = ({ note }: INoteProps) => {
 													active ? "dark:bg-dark-30" : "dark:bg-dark-20"
 												} group flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium duration-300`}
 											>
-												<DeleteIcon color="#CB1919" />
+												<DeleteIcon className="fill-red-600" />
 												Delete
 											</button>
 										)}

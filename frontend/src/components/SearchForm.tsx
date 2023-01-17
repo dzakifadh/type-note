@@ -12,7 +12,7 @@ const SearchForm = () => {
 				type="submit"
 				className="inline-flex w-11 items-center justify-center rounded-lg bg-blue-600 duration-300 hover:bg-blue-700"
 			>
-				<SearchIcon />
+				<SearchIcon className="fill-white" />
 			</button>
 		</form>
 	);

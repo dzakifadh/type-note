@@ -2,8 +2,7 @@ import HTMLReactParser from "html-react-parser";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useSWR from "swr";
-import DeleteIcon from "../components/icons/DeleteIcon";
-import EditIcon from "../components/icons/EditIcon";
+import { DeleteIcon, EditIcon } from "../components/icons";
 import ModalDelete from "../components/ModalDelete";
 import * as NoteService from "../services/note";
 import { formatData } from "../utils";
@@ -53,14 +52,14 @@ const NoteDetail = () => {
 						to={`/notes/update/${urlId}`}
 						className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium duration-300 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 					>
-						<EditIcon color="#3471FF" />
+						<EditIcon className="fill-blue-600" />
 						Update
 					</Link>
 					<button
 						onClick={openModal}
 						className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium duration-300 dark:bg-zinc-800 dark:hover:bg-zinc-700"
 					>
-						<DeleteIcon color="#CB1919" />
+						<DeleteIcon className="fill-red-600" />
 						Delete
 					</button>
 				</div>

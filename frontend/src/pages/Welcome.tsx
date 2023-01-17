@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import PencilIcon from "../components/icons/PencilIcon";
 
 const Welcome = () => {
 	return (
@@ -12,7 +11,7 @@ const Welcome = () => {
 					to="/notes"
 					className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 px-6 duration-300 hover:bg-blue-700"
 				>
-					<PencilIcon /> New Note
+					{/* <PencilIcon className="fill-white" /> New Note */}
 				</Link>
 			</div>
 		</div>

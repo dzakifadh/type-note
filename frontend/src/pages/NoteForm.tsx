@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR, { useSWRConfig } from "swr";
 import { INoteInput } from "../@types/note";
-import WarningIcon from "../components/icons/WarningIcon";
+import { WarningIcon } from "../components/icons";
 import * as NoteService from "../services/note";
 import "../style/quilljs-custom.css";
 
@@ -101,7 +101,7 @@ const NoteForm = () => {
 					/>
 					{errors.title && (
 						<span className="mt-4 flex items-center gap-2 rounded-lg bg-red-500 py-2.5 px-4 text-sm font-medium tracking-wide">
-							<WarningIcon />
+							<WarningIcon color="fill-amber-400" className="h-4 w-4" />
 							{errors.title.message}
 						</span>
 					)}
@@ -166,7 +166,7 @@ const NoteForm = () => {
 
 					{errors.text && (
 						<span className="mt-4 flex items-center gap-2 rounded-lg bg-red-500 py-2.5 px-4 text-sm font-medium tracking-wide">
-							<WarningIcon />
+							<WarningIcon color="fill-amber-400" className="h-4 w-4" />
 							{errors.text.message}
 						</span>
 					)}
