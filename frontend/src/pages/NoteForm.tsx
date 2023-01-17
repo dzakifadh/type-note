@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR, { useSWRConfig } from "swr";
 import { INoteInput } from "../@types/note";
 import WarningIcon from "../components/icons/WarningIcon";
@@ -16,6 +16,7 @@ type INoteparams = {
 const NoteForm = () => {
 	const { mutate } = useSWRConfig();
 	const { pathname } = useLocation();
+	const navigate = useNavigate();
 
 	const { id: urlId } = useParams<INoteparams>();
 
@@ -46,6 +47,7 @@ const NoteForm = () => {
 			reset({ title: "", text: "" });
 			setQuillText("");
 			mutate("/");
+			navigate(`/notes/${urlId}`);
 		} catch (error) {
 			console.log(error);
 		}
