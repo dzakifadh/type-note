@@ -25,6 +25,9 @@ const NoteLayout = () => {
 
 	return (
 		<section className="flex h-screen text-white">
+			<nav className="fixed top-0 right-72 left-96 bg-dark-20 py-5 px-6 dark:shadow dark:shadow-dark">
+				Navbar
+			</nav>
 			<aside className="overlay-bottom h-screen w-96 flex-shrink-0 overflow-auto p-4 dark:bg-dark-10">
 				{notesIsLoading ? (
 					<div className="absolute inset-0 flex items-center justify-center">
@@ -59,7 +62,7 @@ const NoteLayout = () => {
 					</>
 				)}
 			</aside>
-			<main className="flex-1 p-8 dark:bg-dark">
+			<main className="mt-14 flex-1 p-8 dark:bg-dark">
 				<Outlet />
 			</main>
 			<aside className="w-72 flex-shrink-0 dark:bg-dark-10"></aside>
