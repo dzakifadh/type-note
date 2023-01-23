@@ -1,3 +1,5 @@
+import { faPencil } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Link } from "react-router-dom";
 
 const Welcome = () => {
@@ -11,7 +13,8 @@ const Welcome = () => {
 					to="/notes"
 					className="mt-6 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 py-3 px-6 duration-300 hover:bg-blue-700"
 				>
-					{/* <PencilIcon className="fill-white" /> New Note */}
+					<FontAwesomeIcon icon={faPencil} className="h-4 w-4 text-white" /> New
+					Note
 				</Link>
 			</div>
 		</div>

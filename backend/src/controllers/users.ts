@@ -17,8 +17,6 @@ export const signUp: RequestHandler<
 > = async (req, res, next) => {
 	const { username, email, password: passwordRaw } = req.body;
 
-	console.log("req.body", req.body);
-
 	try {
 		if (!username || !email || !passwordRaw) {
 			throw createHttpError(400, "Parameter missing");
@@ -108,7 +106,7 @@ export const getAuthenticatedUser: RequestHandler = async (req, res, next) => {
 	}
 };
 
-export const signout: RequestHandler = (req, res, next) => {
+export const signOut: RequestHandler = (req, res, next) => {
 	req.session.destroy((error) => {
 		if (error) {
 			next(error);

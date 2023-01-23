@@ -1,3 +1,5 @@
+import { faTriangleExclamation } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 import ReactQuill from "react-quill";
@@ -5,7 +7,6 @@ import "react-quill/dist/quill.snow.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR, { useSWRConfig } from "swr";
 import { INoteInput } from "../@types/note";
-import { WarningIcon } from "../components/icons";
 import * as NoteService from "../services/note";
 import "../style/quilljs-custom.css";
 
@@ -101,7 +102,10 @@ const NoteForm = () => {
 					/>
 					{errors.title && (
 						<span className="mt-4 flex items-center gap-2 rounded-lg bg-red-500 py-2.5 px-4 text-sm font-medium tracking-wide">
-							<WarningIcon color="fill-amber-400" className="h-4 w-4" />
+							<FontAwesomeIcon
+								icon={faTriangleExclamation}
+								className="h-4 w-4 text-white"
+							/>
 							{errors.title.message}
 						</span>
 					)}
@@ -166,7 +170,10 @@ const NoteForm = () => {
 
 					{errors.text && (
 						<span className="mt-4 flex items-center gap-2 rounded-lg bg-red-500 py-2.5 px-4 text-sm font-medium tracking-wide">
-							<WarningIcon color="fill-amber-400" className="h-4 w-4" />
+							<FontAwesomeIcon
+								icon={faTriangleExclamation}
+								className="h-4 w-4 text-white"
+							/>
 							{errors.text.message}
 						</span>
 					)}

@@ -10,7 +10,31 @@ import env from "./utils/validateEnv";
 
 const app = express();
 
-app.use(cors());
+const whitelist: string[] = ["http://localhost:3000"];
+
+app.use(
+	cors({
+		origin: (origin, callback) => {
+			console.log("origin XX", origin);
+			console.log("callback XX", callback);
+
+			if (origin) {
+				if (whitelist.indexOf(origin) !== -1 || !origin) {
+					callback(null, true);
+				} else {
+					callback(new Error("Not allowed by CORS"));
+				}
+			} else {
+				// if origin undefined it's mean come from postman :)
+				// If request come from postman
+				callback(null, false);
+				// callback(new Error("Please check backend :)"));
+			}
+		},
+		methods: ["POST", "PUT", "GET", "DELETE", "HEAD", "OPTIONS"],
+		credentials: true,
+	})
+);
 
 app.use(morgan("dev"));
 
