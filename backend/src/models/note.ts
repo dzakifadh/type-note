@@ -1,16 +1,14 @@
-import { model, Schema } from "mongoose";
+import { InferSchemaType, model, Schema } from "mongoose";
 
-interface INote {
-	title: string;
-	text: string;
-}
-
-const noteSchema = new Schema<INote>(
+const noteSchema = new Schema(
 	{
+		userId: { type: Schema.Types.ObjectId, required: true },
 		title: { type: String, required: true },
 		text: { type: String, required: true },
 	},
 	{ timestamps: true }
 );
+
+type INote = InferSchemaType<typeof noteSchema>;
 
 export default model<INote>("Note", noteSchema);

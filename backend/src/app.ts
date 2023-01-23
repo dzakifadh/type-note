@@ -4,6 +4,7 @@ import express, { NextFunction, Request, Response } from "express";
 import session from "express-session";
 import createHttpError, { isHttpError } from "http-errors";
 import morgan from "morgan";
+import { requiresAuth } from "./middleware/auth";
 import notesRoutes from "./routes/notes";
 import usersRoutes from "./routes/users";
 import env from "./utils/validateEnv";
@@ -57,7 +58,7 @@ app.use(
 );
 
 // Router
-app.use("/api/notes", notesRoutes);
+app.use("/api/notes", requiresAuth, notesRoutes);
 app.use("/api/users", usersRoutes);
 
 app.use((req, res, next) => {
