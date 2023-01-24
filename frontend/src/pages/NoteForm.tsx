@@ -71,13 +71,17 @@ const NoteForm = () => {
 
 	if (noteError)
 		return (
-			<div className="flex h-full items-center justify-center">
-				Failed to load 🥹
+			<div className="flex h-screen items-center justify-center">
+				{noteError.response.data.error
+					? `${noteError.response.data.error} 😎`
+					: "Failed to load 🥹"}
 			</div>
 		);
 	if (noteIsLoading)
 		return (
-			<div className="flex h-full items-center justify-center">Loading...</div>
+			<div className="flex h-screen items-center justify-center">
+				Loading...
+			</div>
 		);
 
 	return (

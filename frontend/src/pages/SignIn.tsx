@@ -4,11 +4,12 @@ import axios, { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { ISignIn } from "../@types/note";
+import { useAuthContext } from "../context/authContext";
 import * as AuthService from "../services/auth";
 
 const SignIn = () => {
 	const navigate = useNavigate();
-
+	const authContext = useAuthContext();
 	const {
 		register,
 		handleSubmit,
@@ -17,13 +18,13 @@ const SignIn = () => {
 		formState: { errors, isSubmitting },
 	} = useForm<ISignIn>();
 
-	console.log("errors", errors);
-
 	const handleOnSubmit = async (input: ISignIn) => {
 		try {
 			await AuthService.signIn(input);
-			reset({ username: "", password: "" });
+			const userInformation = await AuthService.getUserInformation();
+			authContext.handleAuth(userInformation.data);
 			navigate(`/notes`);
+			reset({ username: "", password: "" });
 		} catch (error) {
 			const err = error as AxiosError;
 

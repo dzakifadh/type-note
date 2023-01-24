@@ -5,3 +5,7 @@ export const formatData = (value: string) => {
 	const year = date.toLocaleString("default", { year: "numeric" });
 	return `${month} ${day}, ${year}`;
 };
+
+export const isObjectEmpty = (obj: object) => {
+	return Object.keys(obj).length === 0;
+};

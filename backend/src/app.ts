@@ -16,9 +16,6 @@ const whitelist: string[] = ["http://localhost:3000"];
 app.use(
 	cors({
 		origin: (origin, callback) => {
-			console.log("origin XX", origin);
-			console.log("callback XX", callback);
-
 			if (origin) {
 				if (whitelist.indexOf(origin) !== -1 || !origin) {
 					callback(null, true);
@@ -26,10 +23,9 @@ app.use(
 					callback(new Error("Not allowed by CORS"));
 				}
 			} else {
-				// if origin undefined it's mean come from postman :)
+				// if origin undefined it's mean come from postman
 				// If request come from postman
 				callback(null, false);
-				// callback(new Error("Please check backend :)"));
 			}
 		},
 		methods: ["POST", "PUT", "GET", "DELETE", "HEAD", "OPTIONS"],
@@ -48,7 +44,7 @@ app.use(
 		resave: false,
 		saveUninitialized: false,
 		cookie: {
-			maxAge: 60 * 60 * 1000,
+			maxAge: 24 * 60 * 60 * 1000, // 60 minute
 		},
 		rolling: true,
 		store: MongoStore.create({

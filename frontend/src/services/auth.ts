@@ -1,27 +1,17 @@
-import axios from "axios";
 import { ISignIn } from "../@types/note";
+import { default as axios } from "../config/axios";
 
 export const signIn = async (auth: ISignIn) => {
-	const res = await axios.post(
-		"http://localhost:8080/api/users/sign-in",
-		auth,
-		{
-			headers: {
-				"Content-Type": "application/json",
-			},
-			withCredentials: true,
-		}
-	);
+	const res = await axios.post("users/sign-in", auth);
 	return res;
 };
 
 export const signOut = async () => {
-	const res = await axios.post(
-		"http://localhost:8080/api/users/sign-out",
-		null,
-		{
-			withCredentials: true,
-		}
-	);
+	const res = await axios.post("users/sign-out", null);
+	return res;
+};
+
+export const getUserInformation = async () => {
+	const res = await axios.get("users");
 	return res;
 };

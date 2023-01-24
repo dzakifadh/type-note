@@ -16,8 +16,3 @@ export interface ISignIn {
 	password: string;
 	credentialError?: () => void;
 }
-
-export type NoteContextType = {
-	notes: INote[];
-	setNotesHandler: (note: INote) => void;
-};
