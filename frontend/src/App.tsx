@@ -12,17 +12,21 @@ import Welcome from "./pages/Welcome";
 const App = () => {
 	const { authInformation } = useAuthContext();
 
-	console.log("APP", authInformation);
+	console.log("authInformation", authInformation);
 
 	return (
 		<Routes>
 			<Route path="/" element={<Welcome />} />
 			<Route path="/sign-in" element={<SignIn />} />
 			<Route path="*" element={<NotFound />} />
-			{/* Protected Routes */}
 			<Route
 				path="/notes"
-				element={<ProtectedRoute isAllowed={authInformation.auth} />}
+				element={
+					<ProtectedRoute
+						isAllowed={authInformation.auth}
+						isLoading={authInformation.isLoading}
+					/>
+				}
 			>
 				<Route path="/notes" element={<Notes />} />
 				<Route path="/notes" element={<NoteLayout />}>

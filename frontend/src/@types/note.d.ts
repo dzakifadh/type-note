@@ -10,9 +10,3 @@ export interface INoteInput {
 	title: string;
 	text?: string;
 }
-
-export interface ISignIn {
-	username: string;
-	password: string;
-	credentialError?: () => void;
-}

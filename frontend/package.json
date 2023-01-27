@@ -21,12 +21,12 @@
 		"framer-motion": "^8.4.2",
 		"html-react-parser": "^3.0.7",
 		"react": "^18.2.0",
-		"react-cookie": "^4.1.1",
 		"react-dom": "^18.2.0",
 		"react-hook-form": "^7.42.0",
 		"react-quill": "^2.0.0",
 		"react-router-dom": "^6.6.2",
 		"swr": "^2.0.0",
+		"typescript-cookie": "^1.0.4",
 		"yup": "^0.32.11"
 	},
 	"devDependencies": {

@@ -4,11 +4,19 @@ export interface IUser {
 	email?: string;
 }
 
+export interface ISignIn {
+	username: string;
+	password: string;
+	credentialError?: () => void;
+}
+
 export interface IAuthInformation extends IUser {
 	auth: boolean;
+	isLoading: boolean;
 }
 
 export type AuthContextType = {
 	authInformation: IAuthInformation;
-	handleAuth: (userValue: IUser) => void;
+	signIn: (input: ISignIn) => void;
+	signOut: () => void;
 };

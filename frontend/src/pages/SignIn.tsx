@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios, { AxiosError } from "axios";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
-import { ISignIn } from "../@types/note";
+import { ISignIn } from "../@types/auth";
 import { useAuthContext } from "../context/authContext";
-import * as AuthService from "../services/auth";
 
 const SignIn = () => {
 	const navigate = useNavigate();
-	const authContext = useAuthContext();
+	const { signIn: signInContext } = useAuthContext();
 	const {
 		register,
 		handleSubmit,
@@ -20,9 +19,7 @@ const SignIn = () => {
 
 	const handleOnSubmit = async (input: ISignIn) => {
 		try {
-			await AuthService.signIn(input);
-			const userInformation = await AuthService.getUserInformation();
-			authContext.handleAuth(userInformation.data);
+			signInContext(input);
 			navigate(`/notes`);
 			reset({ username: "", password: "" });
 		} catch (error) {

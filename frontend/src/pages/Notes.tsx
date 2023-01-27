@@ -1,28 +1,12 @@
-import { AxiosError } from "axios";
-import { useNavigate } from "react-router-dom";
-import * as AuthService from "../services/auth";
+import { useAuthContext } from "../context/authContext";
 
 const Notes = () => {
-	const navigate = useNavigate();
+	const { signOut: signOutContext } = useAuthContext();
 
-	const signOut = async () => {
-		try {
-			await AuthService.signOut();
-			navigate(`/sign-in`);
-		} catch (error) {
-			const err = error as AxiosError;
-
-			console.log("Heheh", err);
-
-			// if (axios.isAxiosError(err)) {
-			// 	const errorMessage = err.response?.data;
-			// 	setError("credentialError", {
-			// 		type: "custom",
-			// 		message: errorMessage.error,
-			// 	});
-			// }
-		}
+	const signOut = () => {
+		signOutContext();
 	};
+
 	return (
 		<div className="flex h-screen items-center justify-center dark:bg-dark dark:text-white">
 			<div>

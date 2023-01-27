@@ -1,4 +1,4 @@
-import { ISignIn } from "../@types/note";
+import { ISignIn } from "../@types/auth";
 import { default as axios } from "../config/axios";
 
 export const signIn = async (auth: ISignIn) => {
