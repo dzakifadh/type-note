@@ -1,4 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
+import LoadingPage from "./LoadingPage";
 
 interface IProtectedRoute {
 	isAllowed: boolean;
@@ -17,7 +18,7 @@ const ProtectedRoute = ({
 	console.log("PROTECTED isLoading", isLoading);
 
 	if (isLoading) {
-		return <>Loading</>;
+		return <LoadingPage />;
 	}
 
 	if (!isAllowed) {

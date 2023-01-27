@@ -20,3 +20,19 @@ body {
 .badge {
 	@apply select-none rounded-full border-2 border-blue-600 bg-blue-600/10 px-2.5 py-1.5 text-xs font-semibold text-blue-600;
 }
+.spinner {
+	width: 30px;
+	height: 30px;
+	border-radius: 50%;
+	background: radial-gradient(farthest-side, #2563eb 94%, #0000) top/5px 5px
+			no-repeat,
+		conic-gradient(#0000 30%, #2563eb);
+	-webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 5px), #000 0);
+	animation: spinner-c7wet2 0.7s infinite linear;
+}
+
+@keyframes spinner-c7wet2 {
+	100% {
+		transform: rotate(1turn);
+	}
+}
