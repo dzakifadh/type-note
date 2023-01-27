@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom";
 import useSWR from "swr";
 import { INote } from "../@types/note";
+import LoadingPage from "../components/LoadingPage";
 import NoteCard from "../components/NoteCard";
 import SearchForm from "../components/SearchForm";
 import * as NoteService from "../services/note";
@@ -22,20 +23,16 @@ const NoteLayout = () => {
 					: "Failed to load 🥹"}
 			</div>
 		);
-	if (notesIsLoading)
-		return (
-			<div className="flex h-screen items-center justify-center">
-				Loading...
-			</div>
-		);
+	if (notesIsLoading) return <LoadingPage />;
 
 	return (
 		<>
 			<section className="flex h-screen text-white">
 				<aside className="overlay-bottom h-screen w-96 flex-shrink-0 overflow-auto p-4 dark:bg-dark-10">
 					{notesIsLoading ? (
-						<div className="absolute inset-0 flex items-center justify-center">
-							<p className="text-lg text-gray-100/90">Loading...</p>
+						<div className="absolute inset-0 flex items-center justify-center gap-3">
+							<div className="spinner"></div>
+							<p>Loading</p>
 						</div>
 					) : (
 						<>

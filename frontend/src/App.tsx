@@ -1,5 +1,4 @@
 import { Route, Routes } from "react-router-dom";
-import LoadingPage from "./components/LoadingPage";
 import ProtectedRoute from "./components/ProtectedRoute";
 import { useAuthContext } from "./context/authContext";
 import NoteDetail from "./pages/NoteDetail";
@@ -8,6 +7,7 @@ import NoteLayout from "./pages/NoteLayout";
 import Notes from "./pages/Notes";
 import NotFound from "./pages/NotFound";
 import SignIn from "./pages/SignIn";
+import Welcome from "./pages/Welcome";
 
 const App = () => {
 	const { authInformation } = useAuthContext();
@@ -16,7 +16,7 @@ const App = () => {
 
 	return (
 		<Routes>
-			<Route path="/" element={<LoadingPage />} />
+			<Route path="/" element={<Welcome />} />
 			<Route path="/sign-in" element={<SignIn />} />
 			<Route path="*" element={<NotFound />} />
 			<Route

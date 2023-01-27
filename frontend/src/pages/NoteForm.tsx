@@ -7,6 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import useSWR, { useSWRConfig } from "swr";
 import { INoteInput } from "../@types/note";
+import LoadingPage from "../components/LoadingPage";
 import * as NoteService from "../services/note";
 import "../style/quilljs-custom.css";
 
@@ -77,12 +78,7 @@ const NoteForm = () => {
 					: "Failed to load 🥹"}
 			</div>
 		);
-	if (noteIsLoading)
-		return (
-			<div className="flex h-screen items-center justify-center">
-				Loading...
-			</div>
-		);
+	if (noteIsLoading) return <LoadingPage />;
 
 	return (
 		<>

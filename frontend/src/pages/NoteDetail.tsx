@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useSWR from "swr";
 import { DeleteIcon, EditIcon } from "../components/icons";
+import LoadingPage from "../components/LoadingPage";
 import ModalDelete from "../components/ModalDelete";
 import * as NoteService from "../services/note";
 import { formatData } from "../utils";
@@ -42,11 +43,7 @@ const NoteDetail = () => {
 		);
 
 	if (noteIsLoading) {
-		return (
-			<div className="flex h-screen items-center justify-center">
-				Loading...
-			</div>
-		);
+		return <LoadingPage />;
 	}
 
 	return (
