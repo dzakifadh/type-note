@@ -1,3 +1,9 @@
+import { Avatar } from "@boringer-avatars/react";
+import {
+	faAngleDown,
+	faBarsStaggered,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Outlet } from "react-router-dom";
 import useSWR from "swr";
 import { INote } from "../@types/note";
@@ -64,8 +70,25 @@ const NoteLayout = () => {
 					)}
 				</aside>
 				<main className="flex-1 overflow-y-auto dark:bg-dark">
-					<nav className="sticky top-0 bg-dark-20 py-5 px-6 dark:shadow dark:shadow-dark">
-						Navbar
+					<nav className="sticky top-0 flex items-center justify-between bg-dark-20 py-4 px-6 dark:shadow dark:shadow-dark">
+						<FontAwesomeIcon
+							icon={faBarsStaggered}
+							className="h-6 w-6 text-white"
+						/>
+						<div className="inline-flex items-center gap-1.5">
+							<Avatar
+								title={false}
+								size={34}
+								variant="beam"
+								name="Mary Baker"
+								square={false}
+								colors={["#FFAD08", "#EDD75A", "#73B06F", "#0C8F8F", "#405059"]}
+							/>
+							<FontAwesomeIcon
+								icon={faAngleDown}
+								className="h-3.5 w-3.5 text-white"
+							/>
+						</div>
 					</nav>
 					<div className="p-8">
 						<Outlet />

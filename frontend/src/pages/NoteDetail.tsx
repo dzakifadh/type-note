@@ -72,7 +72,7 @@ const NoteDetail = () => {
 				{formatData(noteData?.data.updatedAt || noteData?.data.createdAt)}
 			</span>
 			<h2 className="mb-4 text-3xl font-semibold">{noteData?.data.title}</h2>
-			<div className="prose max-w-none prose-p:text-white">
+			<div className="prose max-w-none dark:prose-invert">
 				{noteData?.data.text && HTMLReactParser(noteData?.data.text)}
 			</div>
 			{urlId && (
