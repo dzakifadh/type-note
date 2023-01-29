@@ -9,9 +9,10 @@ import ModalDelete from "./ModalDelete";
 
 interface INoteProps {
 	note: INote;
+	isMasonryItem?: boolean;
 }
 
-const NoteCard = ({ note }: INoteProps) => {
+const NoteCard = ({ note, isMasonryItem = false }: INoteProps) => {
 	const navigate = useNavigate();
 
 	const handleGeNote = (id: string) => {
@@ -25,7 +26,9 @@ const NoteCard = ({ note }: INoteProps) => {
 	};
 
 	return (
-		<div className="relative">
+		<div
+			className={`relative${isMasonryItem ? " mb-4 break-inside-avoid" : ""}`}
+		>
 			<div
 				onClick={(e) => {
 					e.stopPropagation();
@@ -45,7 +48,7 @@ const NoteCard = ({ note }: INoteProps) => {
 			</div>
 			<Menu
 				as="div"
-				className="absolute bottom-4 right-5 z-50 inline-block text-left"
+				className="absolute bottom-4 right-5 z-40 inline-block text-left"
 			>
 				{({ open }) => (
 					<>

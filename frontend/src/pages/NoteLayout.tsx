@@ -1,10 +1,12 @@
 import { Avatar } from "@boringer-avatars/react";
 import {
 	faAngleDown,
+	faArrowLeftLong,
 	faBarsStaggered,
+	faPlus,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 import useSWR from "swr";
 import { INote } from "../@types/note";
 import LoadingPage from "../components/LoadingPage";
@@ -47,6 +49,28 @@ const NoteLayout = () => {
 									<p className="text-lg text-gray-100/90">Note Empty 🥹</p>
 								</div>
 							)}
+							<div className="mb-4 flex justify-between">
+								<Link
+									to="/notes"
+									className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-medium duration-300 dark:bg-neutral-700 dark:hover:bg-neutral-700/80"
+								>
+									<FontAwesomeIcon
+										icon={faArrowLeftLong}
+										className="h-4 w-4 text-white"
+									/>
+									Go Back
+								</Link>
+								<Link
+									to="/notes/create"
+									className="inline-flex items-center gap-2 rounded-lg bg-blue-600 px-3 py-2 text-sm font-medium duration-300 hover:bg-blue-700"
+								>
+									<FontAwesomeIcon
+										icon={faPlus}
+										className="h-4 w-4 text-white"
+									/>
+									Create
+								</Link>
+							</div>
 							<SearchForm />
 							<div className="mt-4 mb-6">
 								<h5 className="mb-3 font-medium text-slate-200/50">

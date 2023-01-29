@@ -38,7 +38,7 @@ const SignIn = () => {
 		<div className="flex h-screen w-full items-center justify-center">
 			<div className="relative">
 				<div className="absolute inset-x-0 -top-20 mb-8 flex items-center justify-center gap-3">
-					<img src="icon-official.svg" alt="icon-official.svg" />
+					<img src="/icon-official.svg" alt="icon-official.svg" />
 					<p className="text-2xl font-bold">Notex</p>
 				</div>
 				<h1 className="mb-4 text-center text-2xl font-semibold text-white">
