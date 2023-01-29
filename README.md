@@ -1,8 +1,8 @@
 # Notex
 
-Notex is a simple note, the purpose of this (super) mini project is to get started with typescript, and refresh my knowledge in backend stuff. It's a MERN stack using full typescript.
+Notex is a simple note, the purpose of this (super) mini project is to get started with typescript, and refresh my knowledge in backend stuff (I'm a frontend and feel curious with backend :sweat_smile:). It's a MERN stack using full typescript.
 
-> This is an undone project and the progress is over 85% progress, i can't continue right now because there side job need to handle :relieved:
+> This is an undone project and the progress is over 85%, i can't continue right now because there are side jobs need to handle :relieved:
 
 ## Main Technologies 🛠️
 
@@ -14,3 +14,5 @@ Notex is a simple note, the purpose of this (super) mini project is to get start
 - [MongoDB](https://www.mongodb.com/) - No Code Backend Platform
 
 Feel free to look around the code :wink:
+
+Thanks
