@@ -19,7 +19,6 @@
 		"@hookform/resolvers": "^2.9.10",
 		"axios": "^1.2.2",
 		"dayjs": "^1.11.7",
-		"framer-motion": "^8.4.2",
 		"html-react-parser": "^3.0.7",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
